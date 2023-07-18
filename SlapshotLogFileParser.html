@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Display JSON Data</title>
+	</head>
+	<style>
+		table {border-collapse: collapse;}
+		td,th {border: 1px solid black;padding: 5px;}
+	</style>
+
+	<body>
+		<input type="file" id="file-input">
+		<button id="upload-button">Upload</button>                      
+		<p></p>
+		
+		<h1>Final Score</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Home</th>
+					<th>Away</th>
+					<th>Winner</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><span type="text" id="score.home">-</td>
+					<td><span type="text" id="score.away">-</td>
+					<td><span type="text" id="winner">-</td>
+				</tr>
+			</tbody>
+		</table>
+	
+		<h1>Game Details</h1>
+		<table>
+		 <thead>
+			<tr>
+			  <th>Arena</th>
+			  <th>Are Periods Enabled?</th>
+			  <th>Current Period</th>
+			  <th>Mercy Rule</th>
+			  <th>Match Length (in Seconds)</th>
+			  <th>Game End Reason</th>
+			</tr>
+		 </thead>
+		  <tbody>
+			<tr>
+			  <td><span type="text" id="arena">-</td>
+			  <td><span type="text" id="periods_enabled">-</td>
+			  <td><span type="text" id="current_period">-</td>
+			  <td><span type="text" id="custom_mercy_rule">-</td>
+			  <td><span type="text" id="match_length">-</td>
+			  <td><span type="text" id="end_reason">-</td>
+			</tr>
+		 </tbody>
+		</table>
+
+		<h1>Player Stats</h1>
+		<table>
+		  <thead>
+			<tr>
+			  <th>Slap Id</th>
+			  <th>Username</th> 
+			  <th>Team</th>
+			  <th>Goals</th>
+			  <th>Assists</th>
+			  <th>Primary Assists</th>
+			  <th>Shots</th>
+			  <th>Saves</th>
+			  <th>Passes</th>
+			  <th>Post Hits</th>
+			  <th>Takeaways</th>
+			  <th>Turnovers</th>
+			  <th>Faceoffs Wins</th>
+			  <th>Faceoff Losses</th>
+			  <th>Possession Time (in Seconds)</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+				<td><span type="text" id="players[0].game_user_id">-</td>
+				<td><span type="text" id="players[0].username">-</td>
+				<td><span type="text" id="players[0].team">-</td>
+				<td><span type="text" id="players[0].stats.goals">-</td>
+				<td><span type="text" id="players[0].stats.assists">-</td>
+				<td><span type="text" id="players[0].stats.primary_assists">-</td>
+				<td><span type="text" id="players[0].stats.shots">-</td>
+				<td><span type="text" id="players[0].stats.saves">-</td>
+				<td><span type="text" id="players[0].stats.passes">-</td>
+				<td><span type="text" id="players[0].stats.post_hits">-</td>
+				<td><span type="text" id="players[0].stats.takeaways">-</td>
+				<td><span type="text" id="players[0].stats.turnovers">-</td>
+				<td><span type="text" id="players[0].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[0].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[0].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[1].game_user_id">-</td>
+				<td><span type="text" id="players[1].username">-</td>
+				<td><span type="text" id="players[1].team">-</td>
+				<td><span type="text" id="players[1].stats.goals">-</td>
+				<td><span type="text" id="players[1].stats.assists">-</td>
+				<td><span type="text" id="players[1].stats.primary_assists">-</td>
+				<td><span type="text" id="players[1].stats.shots">-</td>
+				<td><span type="text" id="players[1].stats.saves">-</td>
+				<td><span type="text" id="players[1].stats.passes">-</td>
+				<td><span type="text" id="players[1].stats.post_hits">-</td>
+				<td><span type="text" id="players[1].stats.takeaways">-</td>
+				<td><span type="text" id="players[1].stats.turnovers">-</td>
+				<td><span type="text" id="players[1].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[1].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[1].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[2].game_user_id">-</td>
+				<td><span type="text" id="players[2].username">-</td>
+				<td><span type="text" id="players[2].team">-</td>
+				<td><span type="text" id="players[2].stats.goals">-</td>
+				<td><span type="text" id="players[2].stats.assists">-</td>
+				<td><span type="text" id="players[2].stats.primary_assists">-</td>
+				<td><span type="text" id="players[2].stats.shots">-</td>
+				<td><span type="text" id="players[2].stats.saves">-</td>
+				<td><span type="text" id="players[2].stats.passes">-</td>
+				<td><span type="text" id="players[2].stats.post_hits">-</td>
+				<td><span type="text" id="players[2].stats.takeaways">-</td>
+				<td><span type="text" id="players[2].stats.turnovers">-</td>
+				<td><span type="text" id="players[2].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[2].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[2].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[3].game_user_id">-</td>
+				<td><span type="text" id="players[3].username">-</td>
+				<td><span type="text" id="players[3].team">-</td>
+				<td><span type="text" id="players[3].stats.goals">-</td>
+				<td><span type="text" id="players[3].stats.assists">-</td>
+				<td><span type="text" id="players[3].stats.primary_assists">-</td>
+				<td><span type="text" id="players[3].stats.shots">-</td>
+				<td><span type="text" id="players[3].stats.saves">-</td>
+				<td><span type="text" id="players[3].stats.passes">-</td>
+				<td><span type="text" id="players[3].stats.post_hits">-</td>
+				<td><span type="text" id="players[3].stats.takeaways">-</td>
+				<td><span type="text" id="players[3].stats.turnovers">-</td>
+				<td><span type="text" id="players[3].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[3].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[3].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[4].game_user_id">-</td>
+				<td><span type="text" id="players[4].username">-</td>
+				<td><span type="text" id="players[4].team">-</td>
+				<td><span type="text" id="players[4].stats.goals">-</td>
+				<td><span type="text" id="players[4].stats.assists">-</td>
+				<td><span type="text" id="players[4].stats.primary_assists">-</td>
+				<td><span type="text" id="players[4].stats.shots">-</td>
+				<td><span type="text" id="players[4].stats.saves">-</td>
+				<td><span type="text" id="players[4].stats.passes">-</td>
+				<td><span type="text" id="players[4].stats.post_hits">-</td>
+				<td><span type="text" id="players[4].stats.takeaways">-</td>
+				<td><span type="text" id="players[4].stats.turnovers">-</td>
+				<td><span type="text" id="players[4].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[4].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[4].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[5].game_user_id">-</td>
+				<td><span type="text" id="players[5].username">-</td>
+				<td><span type="text" id="players[5].team">-</td>
+				<td><span type="text" id="players[5].stats.goals">-</td>
+				<td><span type="text" id="players[5].stats.assists">-</td>
+				<td><span type="text" id="players[5].stats.primary_assists">-</td>
+				<td><span type="text" id="players[5].stats.shots">-</td>
+				<td><span type="text" id="players[5].stats.saves">-</td>
+				<td><span type="text" id="players[5].stats.passes">-</td>
+				<td><span type="text" id="players[5].stats.post_hits">-</td>
+				<td><span type="text" id="players[5].stats.takeaways">-</td>
+				<td><span type="text" id="players[5].stats.turnovers">-</td>
+				<td><span type="text" id="players[5].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[5].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[5].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[6].game_user_id">-</td>
+				<td><span type="text" id="players[6].username">-</td>
+				<td><span type="text" id="players[6].team">-</td>
+				<td><span type="text" id="players[6].stats.goals">-</td>
+				<td><span type="text" id="players[6].stats.assists">-</td>
+				<td><span type="text" id="players[6].stats.primary_assists">-</td>
+				<td><span type="text" id="players[6].stats.shots">-</td>
+				<td><span type="text" id="players[6].stats.saves">-</td>
+				<td><span type="text" id="players[6].stats.passes">-</td>
+				<td><span type="text" id="players[6].stats.post_hits">-</td>
+				<td><span type="text" id="players[6].stats.takeaways">-</td>
+				<td><span type="text" id="players[6].stats.turnovers">-</td>
+				<td><span type="text" id="players[6].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[6].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[6].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[7].game_user_id">-</td>
+				<td><span type="text" id="players[7].username">-</td>
+				<td><span type="text" id="players[7].team">-</td>
+				<td><span type="text" id="players[7].stats.goals">-</td>
+				<td><span type="text" id="players[7].stats.assists">-</td>
+				<td><span type="text" id="players[7].stats.primary_assists">-</td>
+				<td><span type="text" id="players[7].stats.shots">-</td>
+				<td><span type="text" id="players[7].stats.saves">-</td>
+				<td><span type="text" id="players[7].stats.passes">-</td>
+				<td><span type="text" id="players[7].stats.post_hits">-</td>
+				<td><span type="text" id="players[7].stats.takeaways">-</td>
+				<td><span type="text" id="players[7].stats.turnovers">-</td>
+				<td><span type="text" id="players[7].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[7].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[7].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[8].game_user_id">-</td>
+				<td><span type="text" id="players[8].username">-</td>
+				<td><span type="text" id="players[8].team">-</td>
+				<td><span type="text" id="players[8].stats.goals">-</td>
+				<td><span type="text" id="players[8].stats.assists">-</td>
+				<td><span type="text" id="players[8].stats.primary_assists">-</td>
+				<td><span type="text" id="players[8].stats.shots">-</td>
+				<td><span type="text" id="players[8].stats.saves">-</td>
+				<td><span type="text" id="players[8].stats.passes">-</td>
+				<td><span type="text" id="players[8].stats.post_hits">-</td>
+				<td><span type="text" id="players[8].stats.takeaways">-</td>
+				<td><span type="text" id="players[8].stats.turnovers">-</td>
+				<td><span type="text" id="players[8].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[8].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[8].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[9].game_user_id">-</td>
+				<td><span type="text" id="players[9].username">-</td>
+				<td><span type="text" id="players[9].team">-</td>
+				<td><span type="text" id="players[9].stats.goals">-</td>
+				<td><span type="text" id="players[9].stats.assists">-</td>
+				<td><span type="text" id="players[9].stats.primary_assists">-</td>
+				<td><span type="text" id="players[9].stats.shots">-</td>
+				<td><span type="text" id="players[9].stats.saves">-</td>
+				<td><span type="text" id="players[9].stats.passes">-</td>
+				<td><span type="text" id="players[9].stats.post_hits">-</td>
+				<td><span type="text" id="players[9].stats.takeaways">-</td>
+				<td><span type="text" id="players[9].stats.turnovers">-</td>
+				<td><span type="text" id="players[9].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[9].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[9].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[10].game_user_id">-</td>
+				<td><span type="text" id="players[10].username">-</td>
+				<td><span type="text" id="players[10].team">-</td>
+				<td><span type="text" id="players[10].stats.goals">-</td>
+				<td><span type="text" id="players[10].stats.assists">-</td>
+				<td><span type="text" id="players[10].stats.primary_assists">-</td>
+				<td><span type="text" id="players[10].stats.shots">-</td>
+				<td><span type="text" id="players[10].stats.saves">-</td>
+				<td><span type="text" id="players[10].stats.passes">-</td>
+				<td><span type="text" id="players[10].stats.post_hits">-</td>
+				<td><span type="text" id="players[10].stats.takeaways">-</td>
+				<td><span type="text" id="players[10].stats.turnovers">-</td>
+				<td><span type="text" id="players[10].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[10].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[10].stats.possession_time_sec">-</td>
+			</tr>
+			<tr>
+				<td><span type="text" id="players[11].game_user_id">-</td>
+				<td><span type="text" id="players[11].username">-</td>
+				<td><span type="text" id="players[11].team">-</td>
+				<td><span type="text" id="players[11].stats.goals">-</td>
+				<td><span type="text" id="players[11].stats.assists">-</td>
+				<td><span type="text" id="players[11].stats.primary_assists">-</td>
+				<td><span type="text" id="players[11].stats.shots">-</td>
+				<td><span type="text" id="players[11].stats.saves">-</td>
+				<td><span type="text" id="players[11].stats.passes">-</td>
+				<td><span type="text" id="players[11].stats.post_hits">-</td>
+				<td><span type="text" id="players[11].stats.takeaways">-</td>
+				<td><span type="text" id="players[11].stats.turnovers">-</td>
+				<td><span type="text" id="players[11].stats.faceoffs_won">-</td>
+				<td><span type="text" id="players[11].stats.faceoffs_lost">-</td>
+				<td><span type="text" id="players[11].stats.possession_time_sec">-</td>
+			</tr>
+		   </tbody>
+		</table>
+
+
+    <script>
+      const fileInput = document.getElementById('file-input');
+      const uploadButton = document.getElementById('upload-button');
+      uploadButton.addEventListener('click', function() {
+        fileInput.click();
+      });
+      fileInput.addEventListener('change', function() {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function() {
+			const json = reader.result;
+			const data = JSON.parse(json);
+			
+			const winner = document.getElementById('winner');
+			winner.textContent = data.winner;
+			const arena = document.getElementById('arena');
+			arena.textContent = data.arena;
+			const periods_enabled = document.getElementById('periods_enabled');
+			periods_enabled.textContent = data.periods_enabled;
+			const current_period = document.getElementById('current_period');
+			current_period.textContent = data.current_period;
+			const custom_mercy_rule = document.getElementById('custom_mercy_rule');
+			custom_mercy_rule.textContent = data.custom_mercy_rule;
+			const match_length = document.getElementById('match_length');
+			match_length.textContent = data.match_length;
+			const end_reason = document.getElementById('end_reason');
+			end_reason.textContent = data.end_reason;
+			const score_home = document.getElementById('score.home');
+			score_home.textContent = data.score.home;
+			const score_away = document.getElementById('score.away');
+			score_away.textContent = data.score.away;
+			
+			const players_0_game_user_id = document.getElementById('players[0].game_user_id');
+			players_0_game_user_id.textContent = data.players[0].game_user_id;
+			const players_0_username = document.getElementById('players[0].username');
+			players_0_username.textContent = data.players[0].username;
+			const players_0_team = document.getElementById('players[0].team');
+			players_0_team.textContent = data.players[0].team;
+			const players_0_stats_goals = document.getElementById('players[0].stats.goals');
+			players_0_stats_goals.textContent = data.players[0].stats.goals;
+			const players_0_stats_assists = document.getElementById('players[0].stats.assists');
+			players_0_stats_assists.textContent = data.players[0].stats.assists;
+			const players_0_stats_primary_assists = document.getElementById('players[0].stats.primary_assists');
+			players_0_stats_primary_assists.textContent = data.players[0].stats.primary_assists;
+			const players_0_stats_shots = document.getElementById('players[0].stats.shots');
+			players_0_stats_shots.textContent = data.players[0].stats.shots;
+			const players_0_stats_saves = document.getElementById('players[0].stats.saves');
+			players_0_stats_saves.textContent = data.players[0].stats.saves;
+			const players_0_stats_passes = document.getElementById('players[0].stats.passes');
+			players_0_stats_passes.textContent = data.players[0].stats.passes;
+			const players_0_stats_post_hits = document.getElementById('players[0].stats.post_hits');
+			players_0_stats_post_hits.textContent = data.players[0].stats.post_hits;
+			const players_0_stats_takeaways = document.getElementById('players[0].stats.takeaways');
+			players_0_stats_takeaways.textContent = data.players[0].stats.takeaways;
+			const players_0_stats_turnovers = document.getElementById('players[0].stats.turnovers');
+			players_0_stats_turnovers.textContent = data.players[0].stats.turnovers;
+			const players_0_stats_faceoffs_won = document.getElementById('players[0].stats.faceoffs_won');
+			players_0_stats_faceoffs_won.textContent = data.players[0].stats.faceoffs_won;			
+			const players_0_stats_faceoffs_lost = document.getElementById('players[0].stats.faceoffs_lost');
+			players_0_stats_faceoffs_lost.textContent = data.players[0].stats.faceoffs_lost;
+			const players_0_stats_possession_time_sec = document.getElementById('players[0].stats.possession_time_sec');
+			players_0_stats_possession_time_sec.textContent = data.players[0].stats.possession_time_sec;
+			
+			const players_1_game_user_id = document.getElementById('players[1].game_user_id');
+			players_1_game_user_id.textContent = data.players[1].game_user_id;
+			const players_1_username = document.getElementById('players[1].username');
+			players_1_username.textContent = data.players[1].username;
+			const players_1_team = document.getElementById('players[1].team');
+			players_1_team.textContent = data.players[1].team;
+			const players_1_stats_goals = document.getElementById('players[1].stats.goals');
+			players_1_stats_goals.textContent = data.players[1].stats.goals;
+			const players_1_stats_assists = document.getElementById('players[1].stats.assists');
+			players_1_stats_assists.textContent = data.players[1].stats.assists;
+			const players_1_stats_primary_assists = document.getElementById('players[1].stats.primary_assists');
+			players_1_stats_primary_assists.textContent = data.players[1].stats.primary_assists;
+			const players_1_stats_shots = document.getElementById('players[1].stats.shots');
+			players_1_stats_shots.textContent = data.players[1].stats.shots;
+			const players_1_stats_saves = document.getElementById('players[1].stats.saves');
+			players_1_stats_saves.textContent = data.players[1].stats.saves;
+			const players_1_stats_passes = document.getElementById('players[1].stats.passes');
+			players_1_stats_passes.textContent = data.players[1].stats.passes;
+			const players_1_stats_post_hits = document.getElementById('players[1].stats.post_hits');
+			players_1_stats_post_hits.textContent = data.players[1].stats.post_hits;
+			const players_1_stats_takeaways = document.getElementById('players[1].stats.takeaways');
+			players_1_stats_takeaways.textContent = data.players[1].stats.takeaways;
+			const players_1_stats_turnovers = document.getElementById('players[1].stats.turnovers');
+			players_1_stats_turnovers.textContent = data.players[1].stats.turnovers;
+			const players_1_stats_faceoffs_won = document.getElementById('players[1].stats.faceoffs_won');
+			players_1_stats_faceoffs_won.textContent = data.players[1].stats.faceoffs_won;			
+			const players_1_stats_faceoffs_lost = document.getElementById('players[1].stats.faceoffs_lost');
+			players_1_stats_faceoffs_lost.textContent = data.players[1].stats.faceoffs_lost;
+			const players_1_stats_possession_time_sec = document.getElementById('players[1].stats.possession_time_sec');
+			players_1_stats_possession_time_sec.textContent = data.players[1].stats.possession_time_sec;
+			
+			const players_2_game_user_id = document.getElementById('players[2].game_user_id');
+			players_2_game_user_id.textContent = data.players[2].game_user_id;
+			const players_2_username = document.getElementById('players[2].username');
+			players_2_username.textContent = data.players[2].username;
+			const players_2_team = document.getElementById('players[2].team');
+			players_2_team.textContent = data.players[2].team;
+			const players_2_stats_goals = document.getElementById('players[2].stats.goals');
+			players_2_stats_goals.textContent = data.players[2].stats.goals;
+			const players_2_stats_assists = document.getElementById('players[2].stats.assists');
+			players_2_stats_assists.textContent = data.players[2].stats.assists;
+			const players_2_stats_primary_assists = document.getElementById('players[2].stats.primary_assists');
+			players_2_stats_primary_assists.textContent = data.players[2].stats.primary_assists;
+			const players_2_stats_shots = document.getElementById('players[2].stats.shots');
+			players_2_stats_shots.textContent = data.players[2].stats.shots;
+			const players_2_stats_saves = document.getElementById('players[2].stats.saves');
+			players_2_stats_saves.textContent = data.players[2].stats.saves;
+			const players_2_stats_passes = document.getElementById('players[2].stats.passes');
+			players_2_stats_passes.textContent = data.players[2].stats.passes;
+			const players_2_stats_post_hits = document.getElementById('players[2].stats.post_hits');
+			players_2_stats_post_hits.textContent = data.players[2].stats.post_hits;
+			const players_2_stats_takeaways = document.getElementById('players[2].stats.takeaways');
+			players_2_stats_takeaways.textContent = data.players[2].stats.takeaways;
+			const players_2_stats_turnovers = document.getElementById('players[2].stats.turnovers');
+			players_2_stats_turnovers.textContent = data.players[2].stats.turnovers;
+			const players_2_stats_faceoffs_won = document.getElementById('players[2].stats.faceoffs_won');
+			players_2_stats_faceoffs_won.textContent = data.players[2].stats.faceoffs_won;			
+			const players_2_stats_faceoffs_lost = document.getElementById('players[2].stats.faceoffs_lost');
+			players_2_stats_faceoffs_lost.textContent = data.players[2].stats.faceoffs_lost;
+			const players_2_stats_possession_time_sec = document.getElementById('players[2].stats.possession_time_sec');
+			players_2_stats_possession_time_sec.textContent = data.players[2].stats.possession_time_sec;
+			
+			const players_3_game_user_id = document.getElementById('players[3].game_user_id');
+			players_3_game_user_id.textContent = data.players[3].game_user_id;
+			const players_3_username = document.getElementById('players[3].username');
+			players_3_username.textContent = data.players[3].username;
+			const players_3_team = document.getElementById('players[3].team');
+			players_3_team.textContent = data.players[3].team;
+			const players_3_stats_goals = document.getElementById('players[3].stats.goals');
+			players_3_stats_goals.textContent = data.players[3].stats.goals;
+			const players_3_stats_assists = document.getElementById('players[3].stats.assists');
+			players_3_stats_assists.textContent = data.players[3].stats.assists;
+			const players_3_stats_primary_assists = document.getElementById('players[3].stats.primary_assists');
+			players_3_stats_primary_assists.textContent = data.players[3].stats.primary_assists;
+			const players_3_stats_shots = document.getElementById('players[3].stats.shots');
+			players_3_stats_shots.textContent = data.players[3].stats.shots;
+			const players_3_stats_saves = document.getElementById('players[3].stats.saves');
+			players_3_stats_saves.textContent = data.players[3].stats.saves;
+			const players_3_stats_passes = document.getElementById('players[3].stats.passes');
+			players_3_stats_passes.textContent = data.players[3].stats.passes;
+			const players_3_stats_post_hits = document.getElementById('players[3].stats.post_hits');
+			players_3_stats_post_hits.textContent = data.players[3].stats.post_hits;
+			const players_3_stats_takeaways = document.getElementById('players[3].stats.takeaways');
+			players_3_stats_takeaways.textContent = data.players[3].stats.takeaways;
+			const players_3_stats_turnovers = document.getElementById('players[3].stats.turnovers');
+			players_3_stats_turnovers.textContent = data.players[3].stats.turnovers;
+			const players_3_stats_faceoffs_won = document.getElementById('players[3].stats.faceoffs_won');
+			players_3_stats_faceoffs_won.textContent = data.players[3].stats.faceoffs_won;			
+			const players_3_stats_faceoffs_lost = document.getElementById('players[3].stats.faceoffs_lost');
+			players_3_stats_faceoffs_lost.textContent = data.players[3].stats.faceoffs_lost;
+			const players_3_stats_possession_time_sec = document.getElementById('players[3].stats.possession_time_sec');
+			players_3_stats_possession_time_sec.textContent = data.players[3].stats.possession_time_sec;
+			
+			const players_4_game_user_id = document.getElementById('players[4].game_user_id');
+			players_4_game_user_id.textContent = data.players[4].game_user_id;
+			const players_4_username = document.getElementById('players[4].username');
+			players_4_username.textContent = data.players[4].username;
+			const players_4_team = document.getElementById('players[4].team');
+			players_4_team.textContent = data.players[4].team;
+			const players_4_stats_goals = document.getElementById('players[4].stats.goals');
+			players_4_stats_goals.textContent = data.players[4].stats.goals;
+			const players_4_stats_assists = document.getElementById('players[4].stats.assists');
+			players_4_stats_assists.textContent = data.players[4].stats.assists;
+			const players_4_stats_primary_assists = document.getElementById('players[4].stats.primary_assists');
+			players_4_stats_primary_assists.textContent = data.players[4].stats.primary_assists;
+			const players_4_stats_shots = document.getElementById('players[4].stats.shots');
+			players_4_stats_shots.textContent = data.players[4].stats.shots;
+			const players_4_stats_saves = document.getElementById('players[4].stats.saves');
+			players_4_stats_saves.textContent = data.players[4].stats.saves;
+			const players_4_stats_passes = document.getElementById('players[4].stats.passes');
+			players_4_stats_passes.textContent = data.players[4].stats.passes;
+			const players_4_stats_post_hits = document.getElementById('players[4].stats.post_hits');
+			players_4_stats_post_hits.textContent = data.players[4].stats.post_hits;
+			const players_4_stats_takeaways = document.getElementById('players[4].stats.takeaways');
+			players_4_stats_takeaways.textContent = data.players[4].stats.takeaways;
+			const players_4_stats_turnovers = document.getElementById('players[4].stats.turnovers');
+			players_4_stats_turnovers.textContent = data.players[4].stats.turnovers;
+			const players_4_stats_faceoffs_won = document.getElementById('players[4].stats.faceoffs_won');
+			players_4_stats_faceoffs_won.textContent = data.players[4].stats.faceoffs_won;			
+			const players_4_stats_faceoffs_lost = document.getElementById('players[4].stats.faceoffs_lost');
+			players_4_stats_faceoffs_lost.textContent = data.players[4].stats.faceoffs_lost;
+			const players_4_stats_possession_time_sec = document.getElementById('players[4].stats.possession_time_sec');
+			players_4_stats_possession_time_sec.textContent = data.players[4].stats.possession_time_sec;
+			
+			const players_5_game_user_id = document.getElementById('players[5].game_user_id');
+			players_5_game_user_id.textContent = data.players[5].game_user_id;
+			const players_5_username = document.getElementById('players[5].username');
+			players_5_username.textContent = data.players[5].username;
+			const players_5_team = document.getElementById('players[5].team');
+			players_5_team.textContent = data.players[5].team;
+			const players_5_stats_goals = document.getElementById('players[5].stats.goals');
+			players_5_stats_goals.textContent = data.players[5].stats.goals;
+			const players_5_stats_assists = document.getElementById('players[5].stats.assists');
+			players_5_stats_assists.textContent = data.players[5].stats.assists;
+			const players_5_stats_primary_assists = document.getElementById('players[5].stats.primary_assists');
+			players_5_stats_primary_assists.textContent = data.players[5].stats.primary_assists;
+			const players_5_stats_shots = document.getElementById('players[5].stats.shots');
+			players_5_stats_shots.textContent = data.players[5].stats.shots;
+			const players_5_stats_saves = document.getElementById('players[5].stats.saves');
+			players_5_stats_saves.textContent = data.players[5].stats.saves;
+			const players_5_stats_passes = document.getElementById('players[5].stats.passes');
+			players_5_stats_passes.textContent = data.players[5].stats.passes;
+			const players_5_stats_post_hits = document.getElementById('players[5].stats.post_hits');
+			players_5_stats_post_hits.textContent = data.players[5].stats.post_hits;
+			const players_5_stats_takeaways = document.getElementById('players[5].stats.takeaways');
+			players_5_stats_takeaways.textContent = data.players[5].stats.takeaways;
+			const players_5_stats_turnovers = document.getElementById('players[5].stats.turnovers');
+			players_5_stats_turnovers.textContent = data.players[5].stats.turnovers;
+			const players_5_stats_faceoffs_won = document.getElementById('players[5].stats.faceoffs_won');
+			players_5_stats_faceoffs_won.textContent = data.players[5].stats.faceoffs_won;			
+			const players_5_stats_faceoffs_lost = document.getElementById('players[5].stats.faceoffs_lost');
+			players_5_stats_faceoffs_lost.textContent = data.players[5].stats.faceoffs_lost;
+			const players_5_stats_possession_time_sec = document.getElementById('players[5].stats.possession_time_sec');
+			players_5_stats_possession_time_sec.textContent = data.players[5].stats.possession_time_sec;
+			
+			const players_6_game_user_id = document.getElementById('players[6].game_user_id');
+			players_6_game_user_id.textContent = data.players[6].game_user_id;
+			const players_6_username = document.getElementById('players[6].username');
+			players_6_username.textContent = data.players[6].username;
+			const players_6_team = document.getElementById('players[6].team');
+			players_6_team.textContent = data.players[6].team;
+			const players_6_stats_goals = document.getElementById('players[6].stats.goals');
+			players_6_stats_goals.textContent = data.players[6].stats.goals;
+			const players_6_stats_assists = document.getElementById('players[6].stats.assists');
+			players_6_stats_assists.textContent = data.players[6].stats.assists;
+			const players_6_stats_primary_assists = document.getElementById('players[6].stats.primary_assists');
+			players_6_stats_primary_assists.textContent = data.players[6].stats.primary_assists;
+			const players_6_stats_shots = document.getElementById('players[6].stats.shots');
+			players_6_stats_shots.textContent = data.players[6].stats.shots;
+			const players_6_stats_saves = document.getElementById('players[6].stats.saves');
+			players_6_stats_saves.textContent = data.players[6].stats.saves;
+			const players_6_stats_passes = document.getElementById('players[6].stats.passes');
+			players_6_stats_passes.textContent = data.players[6].stats.passes;
+			const players_6_stats_post_hits = document.getElementById('players[6].stats.post_hits');
+			players_6_stats_post_hits.textContent = data.players[6].stats.post_hits;
+			const players_6_stats_takeaways = document.getElementById('players[6].stats.takeaways');
+			players_6_stats_takeaways.textContent = data.players[6].stats.takeaways;
+			const players_6_stats_turnovers = document.getElementById('players[6].stats.turnovers');
+			players_6_stats_turnovers.textContent = data.players[6].stats.turnovers;
+			const players_6_stats_faceoffs_won = document.getElementById('players[6].stats.faceoffs_won');
+			players_6_stats_faceoffs_won.textContent = data.players[6].stats.faceoffs_won;			
+			const players_6_stats_faceoffs_lost = document.getElementById('players[6].stats.faceoffs_lost');
+			players_6_stats_faceoffs_lost.textContent = data.players[6].stats.faceoffs_lost;
+			const players_6_stats_possession_time_sec = document.getElementById('players[6].stats.possession_time_sec');
+			players_6_stats_possession_time_sec.textContent = data.players[6].stats.possession_time_sec;
+			
+			const players_7_game_user_id = document.getElementById('players[7].game_user_id');
+			players_7_game_user_id.textContent = data.players[7].game_user_id;
+			const players_7_username = document.getElementById('players[7].username');
+			players_7_username.textContent = data.players[7].username;
+			const players_7_team = document.getElementById('players[7].team');
+			players_7_team.textContent = data.players[7].team;
+			const players_7_stats_goals = document.getElementById('players[7].stats.goals');
+			players_7_stats_goals.textContent = data.players[7].stats.goals;
+			const players_7_stats_assists = document.getElementById('players[7].stats.assists');
+			players_7_stats_assists.textContent = data.players[7].stats.assists;
+			const players_7_stats_primary_assists = document.getElementById('players[7].stats.primary_assists');
+			players_7_stats_primary_assists.textContent = data.players[7].stats.primary_assists;
+			const players_7_stats_shots = document.getElementById('players[7].stats.shots');
+			players_7_stats_shots.textContent = data.players[7].stats.shots;
+			const players_7_stats_saves = document.getElementById('players[7].stats.saves');
+			players_7_stats_saves.textContent = data.players[7].stats.saves;
+			const players_7_stats_passes = document.getElementById('players[7].stats.passes');
+			players_7_stats_passes.textContent = data.players[7].stats.passes;
+			const players_7_stats_post_hits = document.getElementById('players[7].stats.post_hits');
+			players_7_stats_post_hits.textContent = data.players[7].stats.post_hits;
+			const players_7_stats_takeaways = document.getElementById('players[7].stats.takeaways');
+			players_7_stats_takeaways.textContent = data.players[7].stats.takeaways;
+			const players_7_stats_turnovers = document.getElementById('players[7].stats.turnovers');
+			players_7_stats_turnovers.textContent = data.players[7].stats.turnovers;
+			const players_7_stats_faceoffs_won = document.getElementById('players[7].stats.faceoffs_won');
+			players_7_stats_faceoffs_won.textContent = data.players[7].stats.faceoffs_won;			
+			const players_7_stats_faceoffs_lost = document.getElementById('players[7].stats.faceoffs_lost');
+			players_7_stats_faceoffs_lost.textContent = data.players[7].stats.faceoffs_lost;
+			const players_7_stats_possession_time_sec = document.getElementById('players[7].stats.possession_time_sec');
+			players_7_stats_possession_time_sec.textContent = data.players[7].stats.possession_time_sec;
+			
+			const players_8_game_user_id = document.getElementById('players[8].game_user_id');
+			players_8_game_user_id.textContent = data.players[8].game_user_id;
+			const players_8_username = document.getElementById('players[8].username');
+			players_8_username.textContent = data.players[8].username;
+			const players_8_team = document.getElementById('players[8].team');
+			players_8_team.textContent = data.players[8].team;
+			const players_8_stats_goals = document.getElementById('players[8].stats.goals');
+			players_8_stats_goals.textContent = data.players[8].stats.goals;
+			const players_8_stats_assists = document.getElementById('players[8].stats.assists');
+			players_8_stats_assists.textContent = data.players[8].stats.assists;
+			const players_8_stats_primary_assists = document.getElementById('players[8].stats.primary_assists');
+			players_8_stats_primary_assists.textContent = data.players[8].stats.primary_assists;
+			const players_8_stats_shots = document.getElementById('players[8].stats.shots');
+			players_8_stats_shots.textContent = data.players[8].stats.shots;
+			const players_8_stats_saves = document.getElementById('players[8].stats.saves');
+			players_8_stats_saves.textContent = data.players[8].stats.saves;
+			const players_8_stats_passes = document.getElementById('players[8].stats.passes');
+			players_8_stats_passes.textContent = data.players[8].stats.passes;
+			const players_8_stats_post_hits = document.getElementById('players[8].stats.post_hits');
+			players_8_stats_post_hits.textContent = data.players[8].stats.post_hits;
+			const players_8_stats_takeaways = document.getElementById('players[8].stats.takeaways');
+			players_8_stats_takeaways.textContent = data.players[8].stats.takeaways;
+			const players_8_stats_turnovers = document.getElementById('players[8].stats.turnovers');
+			players_8_stats_turnovers.textContent = data.players[8].stats.turnovers;
+			const players_8_stats_faceoffs_won = document.getElementById('players[8].stats.faceoffs_won');
+			players_8_stats_faceoffs_won.textContent = data.players[8].stats.faceoffs_won;			
+			const players_8_stats_faceoffs_lost = document.getElementById('players[8].stats.faceoffs_lost');
+			players_8_stats_faceoffs_lost.textContent = data.players[8].stats.faceoffs_lost;
+			const players_8_stats_possession_time_sec = document.getElementById('players[8].stats.possession_time_sec');
+			players_8_stats_possession_time_sec.textContent = data.players[8].stats.possession_time_sec;
+			
+			const players_9_game_user_id = document.getElementById('players[9].game_user_id');
+			players_9_game_user_id.textContent = data.players[9].game_user_id;
+			const players_9_username = document.getElementById('players[9].username');
+			players_9_username.textContent = data.players[9].username;
+			const players_9_team = document.getElementById('players[9].team');
+			players_9_team.textContent = data.players[9].team;
+			const players_9_stats_goals = document.getElementById('players[9].stats.goals');
+			players_9_stats_goals.textContent = data.players[9].stats.goals;
+			const players_9_stats_assists = document.getElementById('players[9].stats.assists');
+			players_9_stats_assists.textContent = data.players[9].stats.assists;
+			const players_9_stats_primary_assists = document.getElementById('players[9].stats.primary_assists');
+			players_9_stats_primary_assists.textContent = data.players[9].stats.primary_assists;
+			const players_9_stats_shots = document.getElementById('players[9].stats.shots');
+			players_9_stats_shots.textContent = data.players[9].stats.shots;
+			const players_9_stats_saves = document.getElementById('players[9].stats.saves');
+			players_9_stats_saves.textContent = data.players[9].stats.saves;
+			const players_9_stats_passes = document.getElementById('players[9].stats.passes');
+			players_9_stats_passes.textContent = data.players[9].stats.passes;
+			const players_9_stats_post_hits = document.getElementById('players[9].stats.post_hits');
+			players_9_stats_post_hits.textContent = data.players[9].stats.post_hits;
+			const players_9_stats_takeaways = document.getElementById('players[9].stats.takeaways');
+			players_9_stats_takeaways.textContent = data.players[9].stats.takeaways;
+			const players_9_stats_turnovers = document.getElementById('players[9].stats.turnovers');
+			players_9_stats_turnovers.textContent = data.players[9].stats.turnovers;
+			const players_9_stats_faceoffs_won = document.getElementById('players[9].stats.faceoffs_won');
+			players_9_stats_faceoffs_won.textContent = data.players[9].stats.faceoffs_won;			
+			const players_9_stats_faceoffs_lost = document.getElementById('players[9].stats.faceoffs_lost');
+			players_9_stats_faceoffs_lost.textContent = data.players[9].stats.faceoffs_lost;
+			const players_9_stats_possession_time_sec = document.getElementById('players[9].stats.possession_time_sec');
+			players_9_stats_possession_time_sec.textContent = data.players[9].stats.possession_time_sec;
+			
+			const players_10_game_user_id = document.getElementById('players[10].game_user_id');
+			players_10_game_user_id.textContent = data.players[10].game_user_id;
+			const players_10_username = document.getElementById('players[10].username');
+			players_10_username.textContent = data.players[10].username;
+			const players_10_team = document.getElementById('players[10].team');
+			players_10_team.textContent = data.players[10].team;
+			const players_10_stats_goals = document.getElementById('players[10].stats.goals');
+			players_10_stats_goals.textContent = data.players[10].stats.goals;
+			const players_10_stats_assists = document.getElementById('players[10].stats.assists');
+			players_10_stats_assists.textContent = data.players[10].stats.assists;
+			const players_10_stats_primary_assists = document.getElementById('players[10].stats.primary_assists');
+			players_10_stats_primary_assists.textContent = data.players[10].stats.primary_assists;
+			const players_10_stats_shots = document.getElementById('players[10].stats.shots');
+			players_10_stats_shots.textContent = data.players[10].stats.shots;
+			const players_10_stats_saves = document.getElementById('players[10].stats.saves');
+			players_10_stats_saves.textContent = data.players[10].stats.saves;
+			const players_10_stats_passes = document.getElementById('players[10].stats.passes');
+			players_10_stats_passes.textContent = data.players[10].stats.passes;
+			const players_10_stats_post_hits = document.getElementById('players[10].stats.post_hits');
+			players_10_stats_post_hits.textContent = data.players[10].stats.post_hits;
+			const players_10_stats_takeaways = document.getElementById('players[10].stats.takeaways');
+			players_10_stats_takeaways.textContent = data.players[10].stats.takeaways;
+			const players_10_stats_turnovers = document.getElementById('players[10].stats.turnovers');
+			players_10_stats_turnovers.textContent = data.players[10].stats.turnovers;
+			const players_10_stats_faceoffs_won = document.getElementById('players[10].stats.faceoffs_won');
+			players_10_stats_faceoffs_won.textContent = data.players[10].stats.faceoffs_won;			
+			const players_10_stats_faceoffs_lost = document.getElementById('players[10].stats.faceoffs_lost');
+			players_10_stats_faceoffs_lost.textContent = data.players[10].stats.faceoffs_lost;
+			const players_10_stats_possession_time_sec = document.getElementById('players[10].stats.possession_time_sec');
+			players_10_stats_possession_time_sec.textContent = data.players[10].stats.possession_time_sec;
+			
+			const players_11_game_user_id = document.getElementById('players[11].game_user_id');
+			players_11_game_user_id.textContent = data.players[11].game_user_id;
+			const players_11_username = document.getElementById('players[11].username');
+			players_11_username.textContent = data.players[11].username;
+			const players_11_team = document.getElementById('players[11].team');
+			players_11_team.textContent = data.players[11].team;
+			const players_11_stats_goals = document.getElementById('players[11].stats.goals');
+			players_11_stats_goals.textContent = data.players[11].stats.goals;
+			const players_11_stats_assists = document.getElementById('players[11].stats.assists');
+			players_11_stats_assists.textContent = data.players[11].stats.assists;
+			const players_11_stats_primary_assists = document.getElementById('players[11].stats.primary_assists');
+			players_11_stats_primary_assists.textContent = data.players[11].stats.primary_assists;
+			const players_11_stats_shots = document.getElementById('players[11].stats.shots');
+			players_11_stats_shots.textContent = data.players[11].stats.shots;
+			const players_11_stats_saves = document.getElementById('players[11].stats.saves');
+			players_11_stats_saves.textContent = data.players[11].stats.saves;
+			const players_11_stats_passes = document.getElementById('players[11].stats.passes');
+			players_11_stats_passes.textContent = data.players[11].stats.passes;
+			const players_11_stats_post_hits = document.getElementById('players[11].stats.post_hits');
+			players_11_stats_post_hits.textContent = data.players[11].stats.post_hits;
+			const players_11_stats_takeaways = document.getElementById('players[11].stats.takeaways');
+			players_11_stats_takeaways.textContent = data.players[11].stats.takeaways;
+			const players_11_stats_turnovers = document.getElementById('players[11].stats.turnovers');
+			players_11_stats_turnovers.textContent = data.players[11].stats.turnovers;
+			const players_11_stats_faceoffs_won = document.getElementById('players[11].stats.faceoffs_won');
+			players_11_stats_faceoffs_won.textContent = data.players[11].stats.faceoffs_won;			
+			const players_11_stats_faceoffs_lost = document.getElementById('players[11].stats.faceoffs_lost');
+			players_11_stats_faceoffs_lost.textContent = data.players[11].stats.faceoffs_lost;
+			const players_11_stats_possession_time_sec = document.getElementById('players[11].stats.possession_time_sec');
+			players_11_stats_possession_time_sec.textContent = data.players[11].stats.possession_time_sec;
+			
+        };
+        reader.readAsText(file);
+      });
+		</script>
+	</body>
+</html>
